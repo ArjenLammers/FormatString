@@ -1,4 +1,4 @@
-# FormatString
+# FormatString for Mendix 4
 
 This widget adds a user-defined string to your page, taking object attributes as input parameters.
 

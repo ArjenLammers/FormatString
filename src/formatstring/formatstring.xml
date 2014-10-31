@@ -42,18 +42,13 @@
             <category>Data source</category>
             <description></description>
             <properties>
-                <property key="variablename" type="string" required="true">
-                    <caption>Variable name</caption>
-                    <category>Data source</category>
-                    <description>Identifies the attribute value, this name should be used in 'Display string' property.</description>
-                </property>
-				<property key="attrs" type="attribute" allowNonPersistableEntities="true" isPath="optional" pathType="reference">
+				<property key="attrs" type="attribute" isPath="optional" pathType="reference">
 					<caption>Attribute</caption>
 					<category>Data source</category>
-					<description>Value of this attribute will be used to replace ${your_Variable_Name}, defined in 'Display string' property</description>
+					<description>Refer to this in the display string as ${x} where x is the number of the attribute, starting at 0.</description>
 					<attributeTypes>
 						<attributeType name="AutoNumber"/>
-						<attributeType name="String" />
+						<attributeType name="String"/>
 						<attributeType name="Enum"/>
 						<attributeType name="Integer"/>
 						<attributeType name="Float"/>
@@ -62,49 +57,53 @@
 						<attributeType name="Currency"/>
 					</attributeTypes>
 				</property>
-				<property key="emptyReplacement" type="translatableString" required="false">
-					<caption>Empty value replacement</caption>
+				<property key="datetimeago" type="boolean" defaultValue="false">
+					<caption>Format date as 'time ago'</caption>
 					<category>Data source</category>
-					<description>This string will be used when an attribute returns empty. Note that this string is interpreted as HTML.</description>
+					<description>Use this you want to show the difference between the date attribute and the current time.</description>
 				</property>
-				<property key="datetimeformat" type="enumeration" defaultValue="datetime" >
+				<property key="dateformat" type="string" required="false">
 					<caption>Date format</caption>
-					<category>Behaviour</category>
-					<description>Shows date and/or time according to locale of user. Relative is time relative to current datetime. (E.g. 3 hours from now) </description>
-					<enumerationValues>
-						<enumerationValue key="datetime">Date and time </enumerationValue>
-						<enumerationValue key="date">Date</enumerationValue>
-						<enumerationValue key="time">Time</enumerationValue>
-						<enumerationValue key="relative">Relative</enumerationValue>
-					</enumerationValues>
+					<category>Data source</category>
+					<description>The date format in case the attribute is a DateTime.</description>
+				</property>
+				<property key="timeformat" type="string" required="false">
+					<caption>Time format</caption>
+					<category>Data source</category>
+					<description>The time format in case the attribute is a DateTime.</description>
 				</property>
 				<property key="renderHTML" type="boolean" defaultValue="false">
-					<caption>Render value as HTML</caption>
-					<category>Behaviour</category>
-					<description>Escapes string value when set to false</description>
-				</property>
-				<property key="decimalPrecision" type="integer" defaultValue="2">
-					<caption>Decimal precision</caption>
-					<category>Behaviour</category>
-					<description>Amount of decimals</description>
-				</property>
-				<property key="groupDigits" type="boolean" defaultValue="true">
-					<caption>Group digits</caption>
-					<category>Behaviour</category>
-					<description>Displays a numeric value with group digits</description>
+					<caption>Render attribute as HTML</caption>
+					<category>Data source</category>
+					<description>A boolean to set if the value of the attribute should be interpreted as HTML.</description>
 				</property>
             </properties>
         </property>
+        <property key="decimalPrecision" type="integer" defaultValue="2">
+			<caption>Decimal precision</caption>
+			<category>Data source</category>
+			<description>the amount of decimals to be shown for float and currency</description>
+		</property>
+		<property key="UseCommaDecimal" type="boolean" defaultValue="true">
+			<caption>Comma(,) as decimal separator</caption>
+			<category>Data source</category>
+			<description>use the comma character (,) as the decimal separator</description>
+		</property>
 		<property key="onclickmf" type="microflow" required="false">
             <caption>On click</caption>
             <category>Behavior</category>
-            <description>Microflow to be invoked on click.</description>
+            <description>Microflow to trigger on click.</description>
             <returnType type="Void"/>
         </property>
-		<property key="displaystr" type="translatableString" multiline="true">
+		<property key="displaystr" type="string" defaultValue="${0}" multiline="true">
 			<caption>Display string</caption>
 			<category>Behavior</category>
-			<description>Use ${[your_Variable_Name]} to have the attribute value inserted in this string. Note that this string, except for the replacements, is interpreted as HTML. </description>
+			<description>Use ${x} to replace for each attribute. Note that this string, except for the replacements, is intepreted as HTML. </description>
+		</property>
+		<property key="emptystr" type="translatableString" defaultValue="" required="false">
+			<caption>Empty string</caption>
+			<category>Behavior</category>
+			<description>This string will be used when an attribute returns empty. Note that this string is interpreted as HTML.</description>
 		</property>
 	</properties>
 </widget>
